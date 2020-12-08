@@ -8,6 +8,9 @@ export default {
       });
     }
   },
+  babel: {
+    compact: true
+  },
   /*
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode
@@ -89,7 +92,11 @@ export default {
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
   */
-  build: {},
+  build: {
+    babel: {
+      compact: true
+    }
+  },
   env: {
     auth: process.env.VUE_APP_DEFAULT_AUTH,
     apikey: process.env.VUE_APP_APIKEY,
