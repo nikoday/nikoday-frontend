@@ -1,0 +1,26 @@
+name: Build
+on:
+  push:
+    branches:
+      - main
+      - sandbox
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - name: Install dependencies
+      run: yarn install
+    - name: Build for production
+      run: yarn build
+    - name: Generate static project
+      run: yarn generate
