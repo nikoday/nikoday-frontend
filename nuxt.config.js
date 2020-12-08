@@ -2,6 +2,7 @@ export default {
   loading: "~/components/Loading.vue",
   router: {
     base: './',
+    mode: 'hash',
     extendRoutes(routes) {
       routes.push({
         path: "/",
@@ -21,7 +22,7 @@ export default {
   ** Nuxt target
   ** See https://nuxtjs.org/api/configuration-target
   */
-  target: 'server',
+  target: 'static', // default is 'server'
   /*
   ** Headers of the page
   ** See https://nuxtjs.org/api/configuration-head
