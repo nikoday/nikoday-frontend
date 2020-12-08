@@ -1,6 +1,7 @@
 export default {
   loading: "~/components/Loading.vue",
   router: {
+    base: './',
     extendRoutes(routes) {
       routes.push({
         path: "/",
