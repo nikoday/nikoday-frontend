@@ -19,4 +19,8 @@ jobs:
       with:
         node-version: '12.x'
     - name: Install dependencies
-      run: yarn
+      run: yarn install
+    - name: Build for production
+      run: yarn build
+    - name: Generate static project
+      run: yarn generate
