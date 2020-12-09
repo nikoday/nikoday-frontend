@@ -1,7 +1,7 @@
 export default {
   loading: "~/components/Loading.vue",
   router: {
-    base: './',
+    //base: './',
     mode: 'hash',
     extendRoutes(routes) {
       routes.push({
