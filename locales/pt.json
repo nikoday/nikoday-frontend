@@ -1,13 +1,11 @@
 {
   "top-menu": {
-    "my-teams": {
-      "text": "Meus Times"
-    }
+    "my-teams": "Meus Times",
+    "calendar-team": "Calendário Niko Niko"
   },
   "page-title": {
-    "my-teams": {
-      "text": "Meus Times"
-    }
+    "my-teams": "Meus Times",
+    "calendar-team": "Calendário Niko Niko"
   },
   "navbar": {
     "search": {

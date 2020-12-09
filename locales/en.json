@@ -1,13 +1,11 @@
 {
   "top-menu": {
-    "my-teams": {
-      "text": "My Teams"
-    }
+    "my-teams": "My Teams",
+    "calendar-team": "Niko Niko Calendar"
   },
   "page-title": {
-    "my-teams": {
-      "text": "My Teams"
-    }
+    "my-teams": "My Teams",
+    "calendar-team": "Niko Niko Calendar"
   },
   "navbar": {
     "search": {

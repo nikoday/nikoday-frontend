@@ -11,6 +11,12 @@ export default {
           component: "~/pages/dashboard/teams/index.vue",
         },
         {
+          name: 'team',
+          path: '/team/:id',
+          component: "~/pages/calendar/TeamCalendar.vue",
+          props: true
+        },
+        {
           name: 'auth',
           path: '/auth',
           component: "~/pages/account/login.vue"
