@@ -57,20 +57,22 @@ export default {
     <PageHeader :title="$t('page-title.my-teams.text')"/>
     <div class="row">
       <div v-for="item in teams" :key="item.id" class="col-lg-4">
-        <div class="card ribbon-box">
-          <div class="card-body">
-            <div :class="`ribbon ribbon-primary float-left`">
-              <i :class="`mdi mdi-account-group mr-1`"></i>
-              {{ item.name }}
-            </div>
-            <h5 :class="`text-primary float-right mt-0`">Total: 8 </h5>
-            <div class="ribbon-content">
-              <p class="mb-0">
-                {{ item.description }}
-              </p>
+        <router-link :to="'/team/' + item.id">
+          <div class="card ribbon-box">
+            <div class="card-body">
+              <div :class="`ribbon ribbon-primary float-left`">
+                <i :class="`mdi mdi-account-group mr-1`"></i>
+                {{ item.name }}
+              </div>
+              <h5 :class="`text-primary float-right mt-0`">Total: 8 </h5>
+              <div class="ribbon-content">
+                <p class="mb-0">
+                  {{ item.description }}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        </router-link>
       </div>
       <!-- end col -->
     </div>
