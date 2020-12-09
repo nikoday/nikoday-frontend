@@ -1,4 +1,14 @@
 {
+  "top-menu": {
+    "my-teams": {
+      "text": "Meus Times"
+    }
+  },
+  "page-title": {
+    "my-teams": {
+      "text": "Meus Times"
+    }
+  },
   "navbar": {
     "search": {
       "text": "Pesquisar..."

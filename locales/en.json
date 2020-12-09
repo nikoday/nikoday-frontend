@@ -1,4 +1,14 @@
 {
+  "top-menu": {
+    "my-teams": {
+      "text": "My Teams"
+    }
+  },
+  "page-title": {
+    "my-teams": {
+      "text": "My Teams"
+    }
+  },
   "navbar": {
     "search": {
       "text": "Search..."
