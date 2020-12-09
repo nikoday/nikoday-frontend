@@ -3,11 +3,39 @@ export default {
   router: {
     //base: './',
     mode: 'hash',
-    extendRoutes(routes) {
-      routes.push({
-        path: "/",
-        component: "~/pages/dashboard/teams/index.vue"
-      });
+    extendRoutes(routes, resolve) {
+      routes.push(
+        {
+          name: "teams",
+          path: "/",
+          component: "~/pages/dashboard/teams/index.vue",
+        },
+        {
+          name: 'team',
+          path: '/team/:id',
+          component: "~/pages/calendar/TeamCalendar.vue",
+          props: true
+        },
+        {
+          name: 'auth',
+          path: '/auth',
+          component: "~/pages/account/login.vue"
+        },
+        {
+          name: 'register',
+          path: '/register',
+          component: "~/pages/account/register.vue"
+        },
+        {
+          name: 'forgot-password',
+          path: '/forgot-password',
+          component: "~/pages/account/forgot-password.vue"
+        },
+        {
+          path: '*',
+          redirect: '/'
+        }
+      );
     }
   },
   babel: {
@@ -77,11 +105,12 @@ export default {
   modules: [
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
-    'nuxt-i18n'
+    'nuxt-i18n',
+    '@nuxtjs/axios'
   ],
   i18n: {
     locales: ['en', 'pt'],
-    defaultLocale: 'en',
+    defaultLocale: 'pt',
     vueI18n: {
       fallbackLocale: 'en',
       messages: {
@@ -90,6 +119,12 @@ export default {
       }
     }
   },
+
+  axios: {
+    baseURL: 'http://localhost:8080/api',
+    // proxy: true
+  },
+
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
@@ -101,13 +136,6 @@ export default {
   },
   env: {
     auth: process.env.VUE_APP_DEFAULT_AUTH,
-    apikey: process.env.VUE_APP_APIKEY,
-    authdomain: process.env.VUE_APP_AUTHDOMAIN,
-    databaseurl: process.env.VUE_APP_DATABASEURL,
-    projectid: process.env.VUE_APP_PROJECTId,
-    storgebucket: process.env.VUE_APP_STORAGEBUCKET,
-    message: process.env.VUE_APP_MESSAGINGSENDERID,
-    appid: process.env.VUE_APP_APPId,
-    measurement: process.env.VUE_APP_MEASUREMENTID,
+    apikey: process.env.VUE_APP_APIKEY
   }
 }

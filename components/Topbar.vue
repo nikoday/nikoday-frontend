@@ -130,7 +130,7 @@ export default {
           </template>
 
           <b-dropdown-header>
-            <h6 class="text-overflow m-0 py-2">{{ $t('navbar.dropdown.name.list.greet') }}</h6>
+            <h6 class="text-overflow m-0 py-2">fulano@teste.com</h6>
           </b-dropdown-header>
 
           <b-dropdown-item href="#">

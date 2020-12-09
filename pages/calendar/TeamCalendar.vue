@@ -1,16 +1,17 @@
 <script>
 
 export default {
-  name: 'Teams',
+  name: 'TeamCalendar',
+  props: ['id'],
   head() {
     return {
-      title: `My Teams | NikoDay`,
+      title: `Niko Niko Calendar | NikoDay`,
     };
   },
   middleware: 'router-auth',
   data: function () {
     return {
-      title: "My Teams",
+      title: "Niko Niko Calendar",
       teams: {}
     }
   },
@@ -54,10 +55,10 @@ export default {
 
 <template>
   <div>
-    <PageHeader :title="$t('page-title.my-teams')"/>
+    <PageHeader :title="$t('page-title.calendar-team')"/>
     <div class="row">
       <div v-for="item in teams" :key="item.id" class="col-lg-4">
-        <router-link :to="'/team/' + item.id">
+        <router-link :to="'/calendar/' + item.id">
           <div class="card ribbon-box">
             <div class="card-body">
               <div :class="`ribbon ribbon-primary float-left`">
@@ -86,7 +87,7 @@ export default {
 <!--<template>-->
 <!--  <div class="teams">-->
 <!--    <b-container>-->
-<!--      <router-link to="/new-team">-->
+<!--      <router-link to="/new-calendar">-->
 <!--        <b-button variant="info"-->
 <!--                  style="margin: 10px"-->
 <!--                  v-b-tooltip.hover-->
@@ -99,7 +100,7 @@ export default {
 <!--          <b-card no-body class="card-teams overflow-hidden" bg-variant="primary" text-variant="white">-->
 <!--            <b-row no-gutters>-->
 <!--              <b-col md="12">-->
-<!--                <router-link :to="'/team/' + item.id" class="float-right">-->
+<!--                <router-link :to="'/calendar/' + item.id" class="float-right">-->
 <!--                  <b-button variant="light">-->
 <!--                    <i class="fa fa-folder-open"-->
 <!--                       v-b-tooltip.hover-->

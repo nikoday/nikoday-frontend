@@ -1,8 +1,8 @@
 export const menuItems = [
   {
     id: 1,
-    label: 'menuitems.dashboard.text',
-    icon: 'ri-dashboard-line',
+    label: 'top-menu.my-teams',
+    icon: 'mdi mdi-account-group',
     link: '/'
   }
 

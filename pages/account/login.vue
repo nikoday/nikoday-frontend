@@ -8,6 +8,7 @@ import {
  * Login component
  */
 export default {
+  name: 'Auth',
   data() {
     return {
       email: "nikoday@nikoday.com",
