@@ -1,4 +1,8 @@
 export default {
+  env: {
+    auth: process.env.VUE_APP_DEFAULT_AUTH,
+    apikey: process.env.VUE_APP_APIKEY
+  },
   loading: "~/components/Loading.vue",
   router: {
     //base: './',
@@ -106,7 +110,8 @@ export default {
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
     'nuxt-i18n',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/toast'
   ],
   i18n: {
     locales: ['en', 'pt'],
@@ -134,8 +139,45 @@ export default {
       compact: true
     }
   },
-  env: {
-    auth: process.env.VUE_APP_DEFAULT_AUTH,
-    apikey: process.env.VUE_APP_APIKEY
+
+  toast: {
+    iconPack: 'fontawesome',
+    duration: 4000,
+    position: 'top-center',
+    keepOnHover: true,
+    fullWidth: false,
+    fitToScreen: false,
+  //  theme: 'outline',
+    register: [
+      {
+        name: 'defaultSuccess',
+        message: (payload) => {
+          return !payload.msg ? 'Operação realidada com sucesso!' : payload.msg
+        },
+        options: {
+          type: 'success',
+          icon: 'check'
+        }
+      },
+      {
+        name: 'defaultError',
+        message: (payload) => {
+          return !payload.msg ? 'Oops.. Erro inesperado.' : payload.msg
+        },
+        options: {
+          type: 'error',
+          icon: 'times'
+        }
+      }
+    ]
+  },
+  showError(e) {
+    if (e && e.response && e.response.data) {
+      this.$toast.global.defaultError({msg: e.response.data})
+    } else if (typeof e === 'string') {
+      this.$toast.global.defaultError({msg: e})
+    } else {
+      this.$toast.global.defaultError()
+    }
   }
 }
