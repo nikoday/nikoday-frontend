@@ -92,7 +92,9 @@ export default {
     "~/plugins/quill-editor.js",
     "~/plugins/chartist.js",
     "~/plugins/vue-googlemap.js",
-    "~/plugins/string-filter"
+    "~/plugins/string-filter.js",
+    "~/plugins/axios.js",
+    "~/plugins/global.js"
   ],
   /*
   ** Auto import components
@@ -127,7 +129,9 @@ export default {
 
   axios: {
     baseURL: 'http://localhost:8080/api',
-    // proxy: true
+    // proxy: true,
+    //prefix: '/api',
+    //credentials: true
   },
 
   /*
@@ -147,7 +151,7 @@ export default {
     keepOnHover: true,
     fullWidth: false,
     fitToScreen: false,
-  //  theme: 'outline',
+    //  theme: 'outline',
     register: [
       {
         name: 'defaultSuccess',
@@ -171,13 +175,18 @@ export default {
       }
     ]
   },
-  showError(e) {
-    if (e && e.response && e.response.data) {
-      this.$toast.global.defaultError({msg: e.response.data})
-    } else if (typeof e === 'string') {
-      this.$toast.global.defaultError({msg: e})
-    } else {
-      this.$toast.global.defaultError()
+  extend(config, ctx) {
+    // Added Line
+    config.devtool = ctx.isClient ? 'eval-source-map' : 'inline-source-map'
+
+    // Run ESLint on save
+    if (ctx.isDev && ctx.isClient) {
+      config.module.rules.push({
+        enforce: 'pre',
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        exclude: /(node_modules)/
+      })
     }
   }
 }
