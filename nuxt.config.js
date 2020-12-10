@@ -128,7 +128,7 @@ export default {
   },
 
   axios: {
-    baseURL: 'http://localhost:8080/api',
+    baseURL:  process.env.VUE_AXIOS_BASE_URL || 'https://sandbox-nikoday.frekele.org/api',
     // proxy: true,
     //prefix: '/api',
     //credentials: true

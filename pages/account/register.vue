@@ -37,16 +37,17 @@ export default {
   },
   methods: {
     signUp() {
-      this.submitted = true;
+      this.submitted = true
       // stop here if form is invalid
-      this.$v.$touch();
+      this.$v.$touch()
 
       if (this.$v.$invalid) {
         return;
       } else {
         this.$store.dispatch('user/signUp', null)
           .then(() => {
-            this.$toasted.global.defaultSuccess()
+            this.submitted = false
+            this.$toasted.global.defaultSuccess({msg:' Cadastro realizado com sucesso!'})
           })
           .catch(showError)
       }

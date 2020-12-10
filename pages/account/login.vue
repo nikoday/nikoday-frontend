@@ -34,13 +34,14 @@ export default {
   },
   methods: {
     signIn() {
-      this.submitted = true;
+      this.submitted = true
       // stop here if form is invalid
-      this.$v.$touch();
+      this.$v.$touch()
 
       if (!this.$v.$invalid) {
         this.$store.dispatch('user/signIn', null)
           .then(() => {
+            this.submitted = false
             this.$router.push({path: '/'})
           })
           .catch(() => {
