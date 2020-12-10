@@ -1,6 +1,6 @@
 <script>
 import {
-  mapState
+  mapState, mapGetters
 } from 'vuex'
 
 /**
@@ -11,9 +11,16 @@ export default {
   data() {
     return {}
   },
-  computed: mapState([
-    'layout'
-  ]),
+  computed: {
+    ...mapGetters('user', {
+      validatingToken: 'getValidatingToken',
+      user: 'getUser'
+    }),
+    ...mapGetters('user', {
+      waitingForResponse: 'getWaitingForResponse'
+    }),
+    ...mapState(['layout'])
+  },
   mounted() {
     document.body.setAttribute("data-layout-mode", "horizontal");
   },
@@ -23,8 +30,18 @@ export default {
     },
     hideRightSidebar() {
       document.body.classList.remove("right-bar-enabled");
+    },
+    async validateToken() {
+      this.$store.dispatch('user/validateToken', null).then((valid) => {
+        if (!valid) {
+          this.$router.push({path: '/auth'})
+        }
+      })
     }
   },
+  created() {
+    this.validateToken()
+  }
 }
 </script>
 

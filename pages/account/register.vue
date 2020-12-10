@@ -1,36 +1,15 @@
 <script>
-import {
-  required,
-  email
-} from "vuelidate/lib/validators";
 
-/**
- * Register component
- */
+import {email, required} from "vuelidate/lib/validators";
+import {showError} from '@/plugins/global'
+
 export default {
-  name: "account-register",
-  data() {
+  name: 'AuthRegister',
+  layout: 'auth',
+  data: function () {
     return {
-      user: {
-        username: "",
-        email: "",
-        password: ""
-      },
-      submitted: false,
-      regError: null,
-      tryingToRegister: false,
-      isRegisterError: false,
-      registerSuccess: false,
-    };
-  },
-  layout: "auth",
-  computed: {
-    notification() {
-      return this.$store ? this.$store.state.notification : null;
-    },
-    notificationAutoCloseDuration() {
-      return this.$store && this.$store.state.notification ? 5 : 0;
-    },
+      submitted: false
+    }
   },
   validations: {
     user: {
@@ -43,67 +22,40 @@ export default {
       },
       password: {
         required
-      },
-    },
+      }
+    }
   },
-  created() {
+  computed: {
+    user: {
+      get() {
+        return this.$store.getters['user/getUser']
+      },
+      set(value) {
+        this.$store.commit('user/setUser', value)
+      }
+    }
   },
   methods: {
-    // Try to register the user in with the email, username
-    // and password they provided.
-    tryToRegisterIn() {
-      this.submitted = true;
+    signUp() {
+      this.submitted = true
       // stop here if form is invalid
-      this.$v.$touch();
+      this.$v.$touch()
 
       if (this.$v.$invalid) {
         return;
       } else {
-        if (process.env.auth === "firebase") {
-          this.tryingToRegister = true;
-          // Reset the regError if it existed.
-          this.regError = null;
-          return (
-            this.$store
-              .dispatch("auth/register", {
-                email: this.user.email,
-                password: this.user.password,
-              })
-              // eslint-disable-next-line no-unused-vars
-              .then((token) => {
-                this.tryingToRegister = false;
-                this.isRegisterError = false;
-                this.registerSuccess = true;
-                if (this.registerSuccess) {
-                  this.$router.push(
-                    this.$route.query.redirectFrom || {
-                      path: "/"
-                    }
-                  );
-                }
-              })
-              .catch((error) => {
-                this.tryingToRegister = false;
-                this.regError = error ? error : "";
-                this.isRegisterError = true;
-              })
-          );
-        } else if (process.env.auth === "fakebackend") {
-          const {
-            email,
-            username,
-            password
-          } = this.user;
-          if (email && username && password) {
-            this.$store.dispatch("authfack/registeruser", this.user);
-            this.$store.dispatch('notification/clear')
-          }
-        }
+        this.$store.dispatch('user/signUp', null)
+          .then(() => {
+            this.submitted = false
+            this.$toasted.global.defaultSuccess({msg:' Cadastro realizado com sucesso!'})
+          })
+          .catch(showError)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
+
 
 <template>
   <div class="row justify-content-center">
@@ -128,17 +80,17 @@ export default {
               minute</p>
           </div>
 
-          <form action="#" @submit.prevent="tryToRegisterIn">
-            <b-alert v-model="registerSuccess" class="mt-3" variant="success" dismissible>Registration successfull.
-            </b-alert>
+          <div>
+            <!--            <b-alert v-model="registerSuccess" class="mt-3" variant="success" dismissible>Registration successfull.-->
+            <!--            </b-alert>-->
 
-            <b-alert v-model="isRegisterError" class="mt-3" variant="danger" dismissible
-                     :show="notificationAutoCloseDuration">{{ regError }}
-            </b-alert>
+            <!--            <b-alert v-model="isRegisterError" class="mt-3" variant="danger" dismissible-->
+            <!--                     :show="notificationAutoCloseDuration">{{ regError }}-->
+            <!--            </b-alert>-->
 
-            <b-alert :variant="notification.type" class="mt-3" v-if="notification.message"
-                     :show="notificationAutoCloseDuration" dismissible>{{ notification.message }}
-            </b-alert>
+            <!--            <b-alert :variant="notification.type" class="mt-3" v-if="notification.message"-->
+            <!--                     :show="notificationAutoCloseDuration" dismissible>{{ notification.message }}-->
+            <!--            </b-alert>-->
 
             <div class="form-group">
               <label for="fullname">Username</label>
@@ -179,9 +131,9 @@ export default {
               </div>
             </div>
             <div class="form-group mb-0 text-center">
-              <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
+              <button class="btn btn-primary btn-block" type="submit" @click="signUp">Sign Up</button>
             </div>
-          </form>
+          </div>
 
 
         </div>
@@ -204,3 +156,114 @@ export default {
   </div>
   <!-- end row -->
 </template>
+
+
+<style>
+</style>
+
+<!--<script>-->
+<!--import {-->
+<!--  required,-->
+<!--  email-->
+<!--} from "vuelidate/lib/validators";-->
+
+<!--/**-->
+<!-- * Register component-->
+<!-- */-->
+<!--export default {-->
+<!--  name: "account-register",-->
+<!--  data() {-->
+<!--    return {-->
+<!--      user: {-->
+<!--        username: "",-->
+<!--        email: "",-->
+<!--        password: ""-->
+<!--      },-->
+<!--      submitted: false,-->
+<!--      regError: null,-->
+<!--      tryingToRegister: false,-->
+<!--      isRegisterError: false,-->
+<!--      registerSuccess: false,-->
+<!--    };-->
+<!--  },-->
+<!--  layout: "auth",-->
+<!--  computed: {-->
+<!--    notification() {-->
+<!--      return this.$store ? this.$store.state.notification : null;-->
+<!--    },-->
+<!--    notificationAutoCloseDuration() {-->
+<!--      return this.$store && this.$store.state.notification ? 5 : 0;-->
+<!--    },-->
+<!--  },-->
+<!--  validations: {-->
+<!--    user: {-->
+<!--      username: {-->
+<!--        required-->
+<!--      },-->
+<!--      email: {-->
+<!--        required,-->
+<!--        email-->
+<!--      },-->
+<!--      password: {-->
+<!--        required-->
+<!--      },-->
+<!--    },-->
+<!--  },-->
+<!--  created() {-->
+<!--  },-->
+<!--  methods: {-->
+<!--    // Try to register the user in with the email, username-->
+<!--    // and password they provided.-->
+<!--    tryToRegisterIn() {-->
+<!--      this.submitted = true;-->
+<!--      // stop here if form is invalid-->
+<!--      this.$v.$touch();-->
+
+<!--      if (this.$v.$invalid) {-->
+<!--        return;-->
+<!--      } else {-->
+<!--        if (process.env.auth === "firebase") {-->
+<!--          this.tryingToRegister = true;-->
+<!--          // Reset the regError if it existed.-->
+<!--          this.regError = null;-->
+<!--          return (-->
+<!--            this.$store-->
+<!--              .dispatch("auth/register", {-->
+<!--                email: this.user.email,-->
+<!--                password: this.user.password,-->
+<!--              })-->
+<!--              // eslint-disable-next-line no-unused-vars-->
+<!--              .then((token) => {-->
+<!--                this.tryingToRegister = false;-->
+<!--                this.isRegisterError = false;-->
+<!--                this.registerSuccess = true;-->
+<!--                if (this.registerSuccess) {-->
+<!--                  this.$router.push(-->
+<!--                    this.$route.query.redirectFrom || {-->
+<!--                      path: "/"-->
+<!--                    }-->
+<!--                  );-->
+<!--                }-->
+<!--              })-->
+<!--              .catch((error) => {-->
+<!--                this.tryingToRegister = false;-->
+<!--                this.regError = error ? error : "";-->
+<!--                this.isRegisterError = true;-->
+<!--              })-->
+<!--          );-->
+<!--        } else if (process.env.auth === "fakebackend") {-->
+<!--          const {-->
+<!--            email,-->
+<!--            username,-->
+<!--            password-->
+<!--          } = this.user;-->
+<!--          if (email && username && password) {-->
+<!--            this.$store.dispatch("authfack/registeruser", this.user);-->
+<!--            this.$store.dispatch('notification/clear')-->
+<!--          }-->
+<!--        }-->
+<!--      }-->
+<!--    },-->
+<!--  },-->
+<!--};-->
+<!--</script>-->

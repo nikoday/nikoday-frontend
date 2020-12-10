@@ -41,6 +41,7 @@ export default {
     let user = this.$store.getters['user/getUser']
     //if (user && user.token) {
     this.getTeams()
+    //this.$toasted.global.defaultSuccess()
     //} else {
     //  this.$router.push({path: '/auth'})
     //}
