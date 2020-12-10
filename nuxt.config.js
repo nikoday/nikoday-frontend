@@ -147,7 +147,7 @@ export default {
   toast: {
     iconPack: 'fontawesome',
     duration: 4000,
-    position: 'top-center',
+    position: 'bottom-center',
     keepOnHover: true,
     fullWidth: false,
     fitToScreen: false,
@@ -181,6 +181,7 @@ export default {
 
     // Run ESLint on save
     if (ctx.isDev && ctx.isClient) {
+      config.mode = 'development'
       config.module.rules.push({
         enforce: 'pre',
         test: /\.(js|vue)$/,

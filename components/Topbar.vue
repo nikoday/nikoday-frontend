@@ -1,9 +1,15 @@
 <script>
+
+import {
+  mapState, mapGetters
+} from 'vuex'
+
 /**
  * Topbar component
  */
 export default {
-  data() {
+  computed: mapState('user', ['user']),
+  data: function () {
     return {
       languages: [{
         flag: require("~/assets/images/flags/us.jpg"),
@@ -20,12 +26,15 @@ export default {
       text: null,
       flag: null,
       value: null,
-    };
+    }
   },
   mounted() {
     this.value = this.languages.find((x) => x.language === this.$i18n.locale);
     this.text = this.value.title;
     this.flag = this.value.flag;
+  },
+  created() {
+    this.validateToken()
   },
   methods: {
     /**
@@ -33,37 +42,6 @@ export default {
      */
     toggleMenu() {
       this.$parent.toggleMenu();
-    },
-    /**
-     * Full screen
-     */
-    initFullScreen() {
-      document.body.classList.toggle("fullscreen-enable");
-      if (
-        !document.fullscreenElement &&
-        /* alternative standard method */
-        !document.mozFullScreenElement &&
-        !document.webkitFullscreenElement
-      ) {
-        // current working methods
-        if (document.documentElement.requestFullscreen) {
-          document.documentElement.requestFullscreen();
-        } else if (document.documentElement.mozRequestFullScreen) {
-          document.documentElement.mozRequestFullScreen();
-        } else if (document.documentElement.webkitRequestFullscreen) {
-          document.documentElement.webkitRequestFullscreen(
-            Element.ALLOW_KEYBOARD_INPUT
-          );
-        }
-      } else {
-        if (document.cancelFullScreen) {
-          document.cancelFullScreen();
-        } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen();
-        } else if (document.webkitCancelFullScreen) {
-          document.webkitCancelFullScreen();
-        }
-      }
     },
     /**
      * Set languages
@@ -84,17 +62,19 @@ export default {
     /**
      * Logout user
      */
-    logoutUser() {
-      if (process.env.auth === "firebase") {
-        this.$store.dispatch("auth/logOut");
-      } else if (process.env.auth === "fakebackend") {
-        this.$store.dispatch("authfack/logout");
-      }
-      this.$router.push({
-        path: "/account/login",
-      });
+    async logout() {
+      this.$store.dispatch('user/logout', null).then(() => {
+        this.$router.push({path: '/auth'})
+      })
     },
-  },
+    async validateToken() {
+      this.$store.dispatch('user/validateToken', null).then((valid) => {
+        if (!valid) {
+          this.$router.push({path: '/auth'})
+        }
+      })
+    }
+  }
 };
 </script>
 
@@ -123,14 +103,14 @@ export default {
             <div class="nav-user mr-0">
               <img src="~/assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle"/>
               <span class="pro-user-name ml-1">
-                            {{ $t('navbar.dropdown.name.text') }}
+                            {{ user.username }}
                             <i class="mdi mdi-chevron-down"></i>
                         </span>
             </div>
           </template>
 
           <b-dropdown-header>
-            <h6 class="text-overflow m-0 py-2">fulano@teste.com</h6>
+            <h6 class="text-overflow m-0 py-2">{{ user.email }}</h6>
           </b-dropdown-header>
 
           <b-dropdown-item href="#">
@@ -144,7 +124,7 @@ export default {
           </b-dropdown-item>
 
           <b-dropdown-divider></b-dropdown-divider>
-          <a class="dropdown-item" @click="logoutUser" href="jvascript: void(0);">
+          <a class="dropdown-item" @click="logout" href="javascript: void(0);">
             <i class="fe-log-out mr-1"></i>
             <span>{{ $t('navbar.dropdown.name.list.logout') }}</span>
           </a>

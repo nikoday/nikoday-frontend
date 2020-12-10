@@ -1,15 +1,17 @@
+import Vue from 'vue'
+
+export const userKey = '__task_board_user'
+export const baseApiUrl = process.env.NODE_ENV === 'production' ? 'https://slim-task-board.herokuapp.com' : 'http://localhost:80'
+
 export function showError(e) {
   if (e && e.response && e.response.data) {
-    this.$toast.global.defaultError({msg: e.response.data})
+    Vue.toasted.global.defaultError({msg: e.response.data})
   } else if (typeof e === 'string') {
-    this.$toast.global.defaultError({msg: e})
+    Vue.toasted.global.defaultError({msg: e})
   } else {
-    this.$toast.global.defaultError()
+    Vue.toasted.global.defaultError()
   }
 }
 
 
-export default ({app}, inject) => {
-  // Inject showError(e) in Vue, context and store.
-  inject('showError', showError)
-}
+export default {baseApiUrl, showError, userKey}
