@@ -107,6 +107,7 @@ export default {
     "~/plugins/vue-googlemap.js",
     "~/plugins/string-filter.js",
     "~/plugins/vue-gravatar.js",
+    "~/plugins/vue-mq.js",
     "~/plugins/axios.js",
     "~/plugins/global.js"
   ],
