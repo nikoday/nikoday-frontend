@@ -8,53 +8,8 @@ export default {
   components: {Gravatar},
   data: function () {
     return {
-      contacts: [{
-        profile: require("~/assets/images/users/avatar-3.jpg"),
-        name: "Denver Barker",
-        designation: "@Founder ",
-        site: "websitename.com"
-      },
-        {
-          name: "Robert McBride",
-          designation: "@Webdesigner",
-          site: "abcweb.com"
-        },
-        {
-          profile: require("~/assets/images/users/avatar-4.jpg"),
-          name: "Peter White",
-          designation: "@Webdesigner",
-          site: "mywebs.com"
-        },
-        {
-          profile: require("~/assets/images/users/avatar-5.jpg"),
-          name: "Ronald Myrick",
-          designation: "@Director",
-          site: "profileq.com"
-        },
-        {
-          profile: require("~/assets/images/users/avatar-6.jpg"),
-          name: "Paul Halpern",
-          designation: "@Manager",
-          site: "coolweb.com"
-        },
-        {
-          profile: require("~/assets/images/users/avatar-7.jpg"),
-          name: "Ricky Atwell",
-          designation: "@Programmer",
-          site: "supported.com"
-        },
-        {
-          name: "James Richards",
-          designation: "@Webdeveloper",
-          site: "website.com"
-        },
-        {
-          profile: require("~/assets/images/users/avatar-8.jpg"),
-          name: "Charles Martinez",
-          designation: "@Webdesigner",
-          site: "demosite.com.com"
-        }
-      ],
+      nikoCalendar: null,
+      weekOfYear: "2020-W50",
       simplePieChart: {
         data: {
           labels: ['Happy', 'Neutral', 'Sad'],
@@ -95,10 +50,21 @@ export default {
     async loadEagerFullTeam() {
       this.$store.dispatch('team/loadEagerFullTeam', {id: this.id}).then(() => {
       })
+    },
+    async loadNikoCalendar() {
+      this.$axios.get(`/team/${this.id}/niko-calendar/${this.weekOfYear}`)
+        .then(response => {
+          if (response.data)
+            this.nikoCalendar = response.data
+        })
+        .catch(error => {
+          reject(error)
+        })
     }
   },
   mounted() {
     this.loadEagerFullTeam()
+    this.loadNikoCalendar()
   }
 
 }
@@ -130,6 +96,10 @@ export default {
                   {{ team.description }}
                 </p>
 
+                <div id="example-week" label-cols-sm="2" label-cols-lg="2" label="Week" label-for="week">
+                  <b-form-input id="week" value="2019-W33" type="week"></b-form-input>
+                </div>
+
                 <div class="table-responsive">
                   <table class="table table-bordered mb-0">
                     <thead>
@@ -141,7 +111,7 @@ export default {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    <tr v-for="( line, index) in nikoCalendar.lines" :key="index">
                       <th scope="row">1</th>
                       <td>Mark</td>
                       <td>Otto</td>
