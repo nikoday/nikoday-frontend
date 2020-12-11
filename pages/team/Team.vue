@@ -4,7 +4,32 @@ export default {
   name: 'Team',
   props: ['id'],
   data: function () {
-    return {}
+    return {
+      simplePieChart: {
+        data: {
+          labels: ['Happy', 'Neutral', 'Sad'],
+          series: [40, 25, 10]
+        },
+        options: {
+          height: 300,
+          showLabel: true
+        }
+      },
+      simpleLineChart: {
+        data: {
+          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+          series: [
+            [12, 9, 7, 8, 5],
+            [2, 1, 3.5, 7, 3],
+            [1, 3, 4, 5, 6]
+          ]
+        },
+        options: {
+          height: 300,
+          fullWidth: true,
+        }
+      }
+    }
   },
   computed: {
     board: {
@@ -52,18 +77,39 @@ export default {
     </router-link>
 
     <b-tabs content-class>
+
       <b-tab title="Niko Niko Calendar" active>
-        <p>{{ text }}</p>
-        <p class="mb-0">{{ content }}</p>
+        <p>{{ }}</p>
+        <p class="mb-0">{{ }}</p>
       </b-tab>
+
+
       <b-tab title="Team Users">
-        <p>{{ content }}</p>
-        <p class="mb-0">{{ text }}</p>
+        <p>{{ }}</p>
+        <p class="mb-0">{{ }}</p>
       </b-tab>
+
       <b-tab title="Graphics">
-        <p>{{ content }}</p>
-        <p class="mb-0">{{ text }}</p>
+        <div class="row">
+          <b-col cols="12">
+            <chartist ratio="ct-chart"
+                      v-if="simpleLineChart.data"
+                      :data="simpleLineChart.data"
+                      :options="simpleLineChart.options"
+                      type="Line"></chartist>
+          </b-col>
+        </div>
+        <div class="row">
+          <b-col cols="12">
+            <chartist ratio="ct-chart"
+                      v-if="simplePieChart.data"
+                      :data="simplePieChart.data"
+                      :options="simplePieChart.options"
+                      type="Pie"></chartist>
+          </b-col>
+        </div>
       </b-tab>
+
     </b-tabs>
 
   </div>
