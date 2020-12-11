@@ -14,12 +14,25 @@ export default {
           path: "/",
           component: "~/pages/dashboard/teams/index.vue",
         },
+
         {
           name: 'team',
           path: '/team/:id',
-          component: "~/pages/calendar/TeamCalendar.vue",
+          component: "~/pages/team/Team.vue",
           props: true
         },
+        {
+          name: 'new-team',
+          path: '/new-team',
+          component: "~/pages/team/EditTeam.vue",
+        },
+        {
+          name: 'edit-team',
+          path: '/edit-team/:id',
+          component: "~/pages/team/EditTeam.vue",
+          props: true
+        },
+
         {
           name: 'auth',
           path: '/auth',
@@ -128,7 +141,7 @@ export default {
   },
 
   axios: {
-    baseURL:  process.env.VUE_AXIOS_BASE_URL || 'https://sandbox-nikoday.frekele.org/api',
+    baseURL: process.env.VUE_AXIOS_BASE_URL || 'https://sandbox-nikoday.frekele.org/api',
     // proxy: true,
     //prefix: '/api',
     //credentials: true
