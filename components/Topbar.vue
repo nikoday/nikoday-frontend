@@ -135,21 +135,25 @@ export default {
       <div class="logo-box">
         <nuxt-link to="/" class="logo logo-dark text-center">
                 <span class="logo-sm">
-                    <img src="~/assets/images/logo-sm-dark.png" alt height="24"/>
+                  <h1 class="text-primary"><i class=" fas fa-smile-beam"></i></h1>
+                  <!--                    <img src="~/assets/images/logo-sm-dark.png" alt height="24"/>-->
                   <!-- <span class="logo-lg-text-light">NikoDay</span> -->
                 </span>
           <span class="logo-lg">
-                    <img src="~/assets/images/logo-dark.png" alt height="20"/>
+             <h1 class="text-primary">NikoDay <i class=" fas fa-smile-beam"></i></h1>
+            <!--                    <img src="~/assets/images/logo-dark.png" alt height="20"/>-->
             <!-- <span class="logo-lg-text-light">M</span> -->
                 </span>
         </nuxt-link>
 
-        <nuxt-link to="/" class="logo logo-light text-center">
+        <nuxt-link to="/" class="logo logo-light text-center" style="margin-top: 1em">
                 <span class="logo-sm">
-                    <img src="~/assets/images/logo-sm.png" alt height="24"/>
+                   <h1 class="text-white"><i class=" fas fa-smile-beam"></i></h1>
+                  <!--                    <img src="~/assets/images/logo-sm.png" alt height="24"/>-->
                 </span>
           <span class="logo-lg">
-                    <img src="~/assets/images/logo-light.png" alt height="20"/>
+             <h1 class="text-white">NikoDay <i class=" fas fa-smile-beam"></i></h1>
+            <!--                    <img src="~/assets/images/logo-light.png" alt height="20"/>-->
                 </span>
         </nuxt-link>
       </div>
