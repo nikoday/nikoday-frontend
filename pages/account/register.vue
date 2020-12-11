@@ -47,7 +47,8 @@ export default {
         this.$store.dispatch('user/signUp', null)
           .then(() => {
             this.submitted = false
-            this.$toasted.global.defaultSuccess({msg:' Cadastro realizado com sucesso!'})
+            this.$toasted.global.defaultSuccess({msg: ' Successful registration!'})
+            this.$router.push({path: '/auth'})
           })
           .catch(showError)
       }
@@ -66,13 +67,15 @@ export default {
             <div class="auth-logo">
               <nuxt-link to="/" class="logo logo-dark text-center">
                             <span class="logo-lg">
-                                <img src="~/assets/images/logo-dark.png" alt height="22"/>
+                              <h1 class="text-primary">NikoDay <i class=" fas fa-smile-beam"></i></h1>
+                              <!--                                <img src="~/assets/images/logo-dark.png" alt="" height="22">-->
                             </span>
               </nuxt-link>
 
               <nuxt-link to="/" class="logo logo-light text-center">
                             <span class="logo-lg">
-                                <img src="~/assets/images/logo-light.png" alt height="22"/>
+                              <h1 class="text-white">NikoDay <i class=" fas fa-smile-beam"></i></h1>
+                              <!--                                <img src="~/assets/images/logo-light.png" alt="" height="22">-->
                             </span>
               </nuxt-link>
             </div>
@@ -145,7 +148,7 @@ export default {
         <div class="col-12 text-center">
           <p class="text-muted">
             Already have account?
-            <nuxt-link to="/account/login" class="text-primary font-weight-medium ml-1">Sign In</nuxt-link>
+            <nuxt-link to="/auth" class="text-primary font-weight-medium ml-1">Sign In</nuxt-link>
           </p>
         </div>
         <!-- end col -->
@@ -160,110 +163,3 @@ export default {
 
 <style>
 </style>
-
-<!--<script>-->
-<!--import {-->
-<!--  required,-->
-<!--  email-->
-<!--} from "vuelidate/lib/validators";-->
-
-<!--/**-->
-<!-- * Register component-->
-<!-- */-->
-<!--export default {-->
-<!--  name: "account-register",-->
-<!--  data() {-->
-<!--    return {-->
-<!--      user: {-->
-<!--        username: "",-->
-<!--        email: "",-->
-<!--        password: ""-->
-<!--      },-->
-<!--      submitted: false,-->
-<!--      regError: null,-->
-<!--      tryingToRegister: false,-->
-<!--      isRegisterError: false,-->
-<!--      registerSuccess: false,-->
-<!--    };-->
-<!--  },-->
-<!--  layout: "auth",-->
-<!--  computed: {-->
-<!--    notification() {-->
-<!--      return this.$store ? this.$store.state.notification : null;-->
-<!--    },-->
-<!--    notificationAutoCloseDuration() {-->
-<!--      return this.$store && this.$store.state.notification ? 5 : 0;-->
-<!--    },-->
-<!--  },-->
-<!--  validations: {-->
-<!--    user: {-->
-<!--      username: {-->
-<!--        required-->
-<!--      },-->
-<!--      email: {-->
-<!--        required,-->
-<!--        email-->
-<!--      },-->
-<!--      password: {-->
-<!--        required-->
-<!--      },-->
-<!--    },-->
-<!--  },-->
-<!--  created() {-->
-<!--  },-->
-<!--  methods: {-->
-<!--    // Try to register the user in with the email, username-->
-<!--    // and password they provided.-->
-<!--    tryToRegisterIn() {-->
-<!--      this.submitted = true;-->
-<!--      // stop here if form is invalid-->
-<!--      this.$v.$touch();-->
-
-<!--      if (this.$v.$invalid) {-->
-<!--        return;-->
-<!--      } else {-->
-<!--        if (process.env.auth === "firebase") {-->
-<!--          this.tryingToRegister = true;-->
-<!--          // Reset the regError if it existed.-->
-<!--          this.regError = null;-->
-<!--          return (-->
-<!--            this.$store-->
-<!--              .dispatch("auth/register", {-->
-<!--                email: this.user.email,-->
-<!--                password: this.user.password,-->
-<!--              })-->
-<!--              // eslint-disable-next-line no-unused-vars-->
-<!--              .then((token) => {-->
-<!--                this.tryingToRegister = false;-->
-<!--                this.isRegisterError = false;-->
-<!--                this.registerSuccess = true;-->
-<!--                if (this.registerSuccess) {-->
-<!--                  this.$router.push(-->
-<!--                    this.$route.query.redirectFrom || {-->
-<!--                      path: "/"-->
-<!--                    }-->
-<!--                  );-->
-<!--                }-->
-<!--              })-->
-<!--              .catch((error) => {-->
-<!--                this.tryingToRegister = false;-->
-<!--                this.regError = error ? error : "";-->
-<!--                this.isRegisterError = true;-->
-<!--              })-->
-<!--          );-->
-<!--        } else if (process.env.auth === "fakebackend") {-->
-<!--          const {-->
-<!--            email,-->
-<!--            username,-->
-<!--            password-->
-<!--          } = this.user;-->
-<!--          if (email && username && password) {-->
-<!--            this.$store.dispatch("authfack/registeruser", this.user);-->
-<!--            this.$store.dispatch('notification/clear')-->
-<!--          }-->
-<!--        }-->
-<!--      }-->
-<!--    },-->
-<!--  },-->
-<!--};-->
-<!--</script>-->

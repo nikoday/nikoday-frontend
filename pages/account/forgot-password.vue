@@ -72,13 +72,15 @@ export default {
             <div class="auth-logo">
               <nuxt-link to="/" class="logo logo-dark text-center">
                             <span class="logo-lg">
-                                <img src="~/assets/images/logo-dark.png" alt="" height="22">
+                              <h1 class="text-primary">NikoDay <i class=" fas fa-smile-beam"></i></h1>
+                              <!--                                <img src="~/assets/images/logo-dark.png" alt="" height="22">-->
                             </span>
               </nuxt-link>
 
               <nuxt-link to="/" class="logo logo-light text-center">
                             <span class="logo-lg">
-                                <img src="~/assets/images/logo-light.png" alt="" height="22">
+                              <h1 class="text-white">NikoDay <i class=" fas fa-smile-beam"></i></h1>
+                              <!--                                <img src="~/assets/images/logo-light.png" alt="" height="22">-->
                             </span>
               </nuxt-link>
             </div>
@@ -111,7 +113,7 @@ export default {
       <div class="row mt-3">
         <div class="col-12 text-center">
           <p class="text-muted">Back to
-            <nuxt-link to="/account/login" class="text-primary font-weight-medium ml-1">Log in</nuxt-link>
+            <nuxt-link to="/auth" class="text-primary font-weight-medium ml-1">Log in</nuxt-link>
           </p>
         </div> <!-- end col -->
       </div>

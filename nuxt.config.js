@@ -117,7 +117,7 @@ export default {
   ],
   i18n: {
     locales: ['en', 'pt'],
-    defaultLocale: 'pt',
+    defaultLocale: 'en',
     vueI18n: {
       fallbackLocale: 'en',
       messages: {
@@ -156,7 +156,7 @@ export default {
       {
         name: 'defaultSuccess',
         message: (payload) => {
-          return !payload.msg ? 'Operação realidada com sucesso!' : payload.msg
+          return !payload.msg ? 'Operation successful!' : payload.msg
         },
         options: {
           type: 'success',
@@ -166,7 +166,7 @@ export default {
       {
         name: 'defaultError',
         message: (payload) => {
-          return !payload.msg ? 'Oops.. Erro inesperado.' : payload.msg
+          return !payload.msg ? 'Oops.. unexpected error. :(' : payload.msg
         },
         options: {
           type: 'error',
