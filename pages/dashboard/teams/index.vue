@@ -39,12 +39,11 @@ export default {
   },
   mounted() {
     let user = this.$store.getters['user/getUser']
-    //if (user && user.token) {
-    this.getTeams()
-    //this.$toasted.global.defaultSuccess()
-    //} else {
-    //  this.$router.push({path: '/auth'})
-    //}
+    if (user && user.token) {
+      this.getTeams()
+    } else {
+      this.$router.push({path: '/auth'})
+    }
   }
 }
 </script>
@@ -56,6 +55,18 @@ export default {
 <template>
   <div>
     <PageHeader :title="$t('page-title.my-teams')"/>
+
+    <div class="row">
+      <router-link to="/new-team">
+        <b-button variant="info"
+                  style="margin: 10px"
+                  v-b-tooltip.hover
+                  title="Create New Team">
+          <i class="fa fa-plus" aria-hidden="true"></i> New Team
+        </b-button>
+      </router-link>
+    </div>
+
     <div class="row">
       <div v-for="item in teams" :key="item.id" class="col-lg-4">
         <router-link :to="'/team/' + item.id">
@@ -82,48 +93,3 @@ export default {
 
   </div>
 </template>
-
-
-<!--<template>-->
-<!--  <div class="teams">-->
-<!--    <b-container>-->
-<!--      <router-link to="/new-team">-->
-<!--        <b-button variant="info"-->
-<!--                  style="margin: 10px"-->
-<!--                  v-b-tooltip.hover-->
-<!--                  title="Adicionar Novo Quadro">-->
-<!--          <i class="fa fa-plus" aria-hidden="true"></i> Novo Quadro-->
-<!--        </b-button>-->
-<!--      </router-link>-->
-<!--      <b-row>-->
-<!--        <b-col class="col-teams" v-for="item in teams" v-bind:key="item.id">-->
-<!--          <b-card no-body class="card-teams overflow-hidden" bg-variant="primary" text-variant="white">-->
-<!--            <b-row no-gutters>-->
-<!--              <b-col md="12">-->
-<!--                <router-link :to="'/team/' + item.id" class="float-right">-->
-<!--                  <b-button variant="light">-->
-<!--                    <i class="fa fa-folder-open"-->
-<!--                       v-b-tooltip.hover-->
-<!--                       title="Abrir Quadro"-->
-<!--                       aria-hidden="true"></i></b-button>-->
-<!--                </router-link>-->
-<!--              </b-col>-->
-<!--              <b-col md="12">-->
-<!--                <h3>{{ item.name }}</h3>-->
-<!--              </b-col>-->
-<!--              <b-col md="12">-->
-<!--                <b-card-body>-->
-<!--                  <b-card-text>-->
-<!--                    {{ item.description }}-->
-<!--                  </b-card-text>-->
-<!--                </b-card-body>-->
-<!--              </b-col>-->
-
-<!--            </b-row>-->
-<!--          </b-card>-->
-
-<!--        </b-col>-->
-<!--      </b-row>-->
-<!--    </b-container>-->
-<!--  </div>-->
-<!--</template>-->

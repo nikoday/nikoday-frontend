@@ -14,12 +14,25 @@ export default {
           path: "/",
           component: "~/pages/dashboard/teams/index.vue",
         },
+
         {
           name: 'team',
           path: '/team/:id',
-          component: "~/pages/calendar/TeamCalendar.vue",
+          component: "~/pages/team/Team.vue",
           props: true
         },
+        {
+          name: 'new-team',
+          path: '/new-team',
+          component: "~/pages/team/EditTeam.vue",
+        },
+        {
+          name: 'edit-team',
+          path: '/edit-team/:id',
+          component: "~/pages/team/EditTeam.vue",
+          props: true
+        },
+
         {
           name: 'auth',
           path: '/auth',
@@ -117,7 +130,7 @@ export default {
   ],
   i18n: {
     locales: ['en', 'pt'],
-    defaultLocale: 'pt',
+    defaultLocale: 'en',
     vueI18n: {
       fallbackLocale: 'en',
       messages: {
@@ -128,7 +141,7 @@ export default {
   },
 
   axios: {
-    baseURL:  process.env.VUE_AXIOS_BASE_URL || 'https://sandbox-nikoday.frekele.org/api',
+    baseURL: process.env.VUE_AXIOS_BASE_URL || 'https://sandbox-nikoday.frekele.org/api',
     // proxy: true,
     //prefix: '/api',
     //credentials: true
@@ -156,7 +169,7 @@ export default {
       {
         name: 'defaultSuccess',
         message: (payload) => {
-          return !payload.msg ? 'Operação realidada com sucesso!' : payload.msg
+          return !payload.msg ? 'Operation successful!' : payload.msg
         },
         options: {
           type: 'success',
@@ -166,7 +179,7 @@ export default {
       {
         name: 'defaultError',
         message: (payload) => {
-          return !payload.msg ? 'Oops.. Erro inesperado.' : payload.msg
+          return !payload.msg ? 'Oops.. unexpected error. :(' : payload.msg
         },
         options: {
           type: 'error',
