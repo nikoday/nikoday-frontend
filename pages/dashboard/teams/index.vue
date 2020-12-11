@@ -69,7 +69,7 @@ export default {
 
     <div class="row">
       <div v-for="item in teams" :key="item.id" class="col-lg-4">
-        <router-link :to="'/edit-team/' + item.id">
+        <router-link :to="'/team/' + item.id">
           <div class="card ribbon-box">
             <div class="card-body">
               <div :class="`ribbon ribbon-primary float-left`">

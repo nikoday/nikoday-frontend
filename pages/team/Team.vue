@@ -31,7 +31,17 @@ export default {
 
 
 <template>
+  <div class="board">
 
+    <router-link :to="'/edit-team/' + id">
+      <b-button variant="info"
+                style="margin: 10px"
+                v-b-tooltip.hover
+                title="Edit Team">
+        <i class="fa fa-pencil" aria-hidden="true"></i> Edit Team
+      </b-button>
+    </router-link>
+  </div>
 </template>
 
 
