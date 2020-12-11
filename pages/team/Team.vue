@@ -120,8 +120,53 @@ export default {
     <b-tabs content-class>
 
       <b-tab title="Niko Niko Calendar" active>
-        <p>{{ }}</p>
-        <p class="mb-0">{{ }}</p>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="header-title">{{ team.name }}</h4>
+                <p class="sub-header" v-if="team.description">
+                  {{ team.description }}
+                </p>
+
+                <div class="table-responsive">
+                  <table class="table table-bordered mb-0">
+                    <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Username</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>@mdo</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>@TwBootstrap</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>Jacob</td>
+                      <td>Thornton</td>
+                      <td>@fat</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div> <!-- end .table-responsive-->
+              </div>
+            </div> <!-- end card -->
+          </div> <!-- end col -->
+        </div>
+
       </b-tab>
 
 
@@ -186,8 +231,8 @@ export default {
           </div>
         </div>
 
-
       </b-tab>
+
 
       <b-tab title="Graphics">
         <div class="row">
