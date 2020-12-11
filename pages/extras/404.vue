@@ -20,10 +20,7 @@ export default {
 
           <div class="text-center">
             <h3 class="mt-4 text-uppercase font-weight-bold">Page not found </h3>
-            <p class="text-muted mb-0 mt-3" style="line-height: 20px;">It's looking like you may have taken a wrong
-              turn. Don't worry...
-              it happens to the best of us. You might want to check your internet connection.
-              Here's a little tip that might help you get back on track.</p>
+            <p class="text-muted mb-0 mt-3" style="line-height: 20px;">Ops....</p>
 
             <nuxt-link to="/" class="btn btn-primary mt-3"><i class="mdi mdi-reply mr-1"></i> Return Home</nuxt-link>
           </div>

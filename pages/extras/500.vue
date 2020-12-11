@@ -26,13 +26,15 @@ export default {
             <div class="auth-logo">
               <nuxt-link to="/" class="logo logo-dark text-center">
                             <span class="logo-lg">
-                                <img src="~/assets/images/logo-dark.png" alt="" height="22">
+                                <h1 class="text-primary">NikoDay <i class=" fas fa-smile-beam"></i></h1>
+                              <!--                                <img src="~/assets/images/logo-dark.png" alt="" height="22">-->
                             </span>
               </nuxt-link>
 
               <nuxt-link to="/" class="logo logo-light text-center">
                             <span class="logo-lg">
-                                <img src="~/assets/images/logo-light.png" alt="" height="22">
+                               <h1 class="text-white">NikoDay <i class=" fas fa-smile-beam"></i></h1>
+                              <!--                                <img src="~/assets/images/logo-light.png" alt="" height="22">-->
                             </span>
               </nuxt-link>
             </div>
@@ -41,8 +43,9 @@ export default {
           <div class="text-center mt-4">
             <h1 class="text-error">500</h1>
             <h3 class="mt-3 mb-2">Internal Server Error</h3>
-            <p class="text-muted mb-3">Why not try refreshing your page? or you can contact <a href=""
-                                                                                               class="text-dark"><b>Support</b></a>
+            <p class="text-muted mb-3">Why not try refreshing your page? or you can contact
+              <a href=""
+                 class="text-dark"><b>Support</b></a>
             </p>
 
             <nuxt-link to="/" class="btn btn-success waves-effect waves-light">Back to Home</nuxt-link>

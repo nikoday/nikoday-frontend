@@ -1,10 +1,15 @@
 <script>
 
+import Gravatar from 'vue-gravatar'
+
 export default {
   name: 'Team',
   props: ['id'],
+  components: {Gravatar},
   data: function () {
     return {
+      nikoCalendar: null,
+      weekOfYear: "2020-W50",
       simplePieChart: {
         data: {
           labels: ['Happy', 'Neutral', 'Sad'],
@@ -32,7 +37,7 @@ export default {
     }
   },
   computed: {
-    board: {
+    team: {
       get() {
         return this.$store.getters['team/getTeam']
       },
@@ -42,13 +47,24 @@ export default {
     }
   },
   methods: {
-    async loadTeam() {
-      this.$store.dispatch('team/loadTeam', {id: this.id}).then(() => {
+    async loadEagerFullTeam() {
+      this.$store.dispatch('team/loadEagerFullTeam', {id: this.id}).then(() => {
       })
+    },
+    async loadNikoCalendar() {
+      this.$axios.get(`/team/${this.id}/niko-calendar/${this.weekOfYear}`)
+        .then(response => {
+          if (response.data)
+            this.nikoCalendar = response.data
+        })
+        .catch(error => {
+          reject(error)
+        })
     }
   },
   mounted() {
-    this.loadTeam()
+    this.loadEagerFullTeam()
+    this.loadNikoCalendar()
   }
 
 }
@@ -56,7 +72,7 @@ export default {
 
 
 <template>
-  <div class="board">
+  <div class="team">
 
     <router-link :to="'/edit-team/' + id">
       <b-button variant="primary"
@@ -67,27 +83,126 @@ export default {
       </b-button>
     </router-link>
 
-    <router-link :to="'/edit-team-user/' + id">
-      <b-button variant="secondary"
-                style="margin: 10px"
-                v-b-tooltip.hover
-                title="Edit Team">
-        <i class="fa fa-pencil" aria-hidden="true"></i> Config Team Users
-      </b-button>
-    </router-link>
-
     <b-tabs content-class>
 
       <b-tab title="Niko Niko Calendar" active>
-        <p>{{ }}</p>
-        <p class="mb-0">{{ }}</p>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="header-title">{{ team.name }}</h4>
+                <p class="sub-header" v-if="team.description">
+                  {{ team.description }}
+                </p>
+
+                <div id="example-week" label-cols-sm="2" label-cols-lg="2" label="Week" label-for="week">
+                  <b-form-input id="week" value="2019-W33" type="week"></b-form-input>
+                </div>
+
+                <div class="table-responsive">
+                  <table class="table table-bordered mb-0">
+                    <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Username</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="( line, index) in nikoCalendar.lines" :key="index">
+                      <th scope="row">1</th>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>@mdo</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>@TwBootstrap</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>Jacob</td>
+                      <td>Thornton</td>
+                      <td>@fat</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div> <!-- end .table-responsive-->
+              </div>
+            </div> <!-- end card -->
+          </div> <!-- end col -->
+        </div>
+
       </b-tab>
 
 
       <b-tab title="Team Users">
-        <p>{{ }}</p>
-        <p class="mb-0">{{ }}</p>
+
+        <div class="row mb-2">
+          <div class="col-sm-4">
+            <a href="javascript:void(0);" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle mr-2"></i> Add
+              New</a>
+          </div>
+          <div class="col-sm-8">
+            <div class="float-sm-right">
+              <form class="form-inline">
+                <div class="form-group mr-2">
+                  <label for="membersearch-input" class="sr-only">Search</label>
+                  <input type="search" class="form-control" id="membersearch-input" placeholder="Search...">
+                </div>
+                <router-link :to="'/edit-team-user/' + id">
+                  <button type="button" class="btn btn-success mb-2 mb-sm-0" alt="Config Team Users">
+                    <i class="mdi mdi-cog"></i></button>
+                </router-link>
+              </form>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-3 col-sm-6" v-for="( teamUsers, index) in team.teamUsers" :key="index">
+            <div class="text-center card">
+              <div class="card-body">
+
+                <b-dropdown class="float-right" variant="black" toggle-class="text-body p-0" right>
+                  <template v-slot:button-content>
+                    <i class="mdi mdi-dots-vertical font-20"></i>
+                  </template>
+                  <b-dropdown-item>Edit</b-dropdown-item>
+                  <b-dropdown-item>Remove</b-dropdown-item>
+                </b-dropdown>
+                <Gravatar :email="teamUsers.user.email"
+                          alt="profile-image"
+                          class="rounded-circle img-thumbnail avatar-xl mt-1"/>
+
+                <!--                <img v-if="teamUsers.profile" :src="teamUsers.profile" class="rounded-circle img-thumbnail avatar-xl mt-1"-->
+                <!--                     alt="profile-image">-->
+                <!--                <div class="avatar-xl mx-auto mt-1" v-if="!teamUsers.profile">-->
+                <!--                  <div class="avatar-title bg-light rounded-circle">-->
+                <!--                    <i class="mdi mdi-account h1 m-0 text-body"></i>-->
+                <!--                  </div>-->
+                <!--                </div>-->
+                <h4 class="mt-3 mb-1">
+                  <nuxt-link to="/contacts/profile" class="text-dark">{{ teamUsers.user.username }}</nuxt-link>
+                </h4>
+                <p class="text-muted">{{ teamUsers.user.email }}</p>
+                <div class="text-muted">
+                  <li v-for="role in teamUsers.roles" :key="role">
+                    {{ role }}
+                  </li>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </b-tab>
+
 
       <b-tab title="Graphics">
         <div class="row">

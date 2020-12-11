@@ -27,7 +27,7 @@ export default {
   methods: {
     async getTeams() {
       this.waitingForResponse = true
-      this.$axios.get('/teams')
+      this.$axios.get('/teams?eager=true')
         .then(response => {
             if (response && response.data) {
               this.teams = response.data
@@ -76,7 +76,7 @@ export default {
                 <i :class="`mdi mdi-account-group mr-1`"></i>
                 {{ item.name }}
               </div>
-              <h5 :class="`text-primary float-right mt-0`">Total: 8 </h5>
+              <h5 :class="`text-primary float-right mt-0`">Total members: {{ item.teamUsers.length }} </h5>
               <div class="ribbon-content">
                 <p class="mb-0">
                   {{ item.description }}
