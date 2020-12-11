@@ -17,11 +17,11 @@ export default {
       },
       simpleLineChart: {
         data: {
-          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
           series: [
-            [12, 9, 7, 8, 5],
-            [2, 1, 3.5, 7, 3],
-            [1, 3, 4, 5, 6]
+            [12, 9, 7, 8, 5, 3, 0],
+            [2, 1, 3.5, 7, 3, 2, 0],
+            [1, 3, 4, 5, 6, 3, 0]
           ]
         },
         options: {
