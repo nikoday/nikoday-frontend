@@ -106,6 +106,7 @@ export default {
     "~/plugins/chartist.js",
     "~/plugins/vue-googlemap.js",
     "~/plugins/string-filter.js",
+    "~/plugins/vue-gravatar.js",
     "~/plugins/axios.js",
     "~/plugins/global.js"
   ],

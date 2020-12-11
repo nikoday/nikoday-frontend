@@ -3,11 +3,13 @@
 import {
   mapState, mapGetters
 } from 'vuex'
+import Gravatar from 'vue-gravatar'
 
 /**
  * Topbar component
  */
 export default {
+  components: {Gravatar},
   computed: mapState('user', ['user']),
   data: function () {
     return {
@@ -101,7 +103,8 @@ export default {
                              toggle-class="p-0">
           <template slot="button-content" class="nav-link dropdown-toggle">
             <div class="nav-user mr-0">
-              <img src="~/assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle"/>
+              <Gravatar :email="user.email" alt="user-image" class="rounded-circle"/>
+              <!--              <img src="~/assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle"/>-->
               <span class="pro-user-name ml-1">
                             {{ user.username }}
                             <i class="mdi mdi-chevron-down"></i>
