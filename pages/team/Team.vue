@@ -104,30 +104,66 @@ export default {
                   <table class="table table-bordered mb-0">
                     <thead>
                     <tr>
-                      <th>#</th>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Username</th>
+                      <th>#Member</th>
+                      <th>Monday</th>
+                      <th>Tuesday</th>
+                      <th>Wednesday</th>
+                      <th>Thursday</th>
+                      <th>Friday</th>
+                      <th>Saturday</th>
+                      <th>Sunday</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="( line, index) in nikoCalendar.lines" :key="index">
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
+                    <tr>
+                      <td>Jair Carlos</td>
+                      <td><h1><i class="text-warning mdi mdi-emoticon-neutral"></i></h1></td>
+                      <td><h1><i class="text-success mdi mdi-emoticon-happy"></i></h1></td>
+                      <td><h1><i class="text-danger mdi mdi-emoticon-sad"></i></h1></td>
+                      <td><h1><i class="text-success mdi mdi-emoticon-happy"></i></h1></td>
+                      <td><h1><i class="text-danger mdi mdi-emoticon-sad"></i></h1></td>
+                      <td><h1><i class="text-success mdi mdi-emoticon-happy"></i></h1></td>
+                      <td><h1><i class="text-warning mdi mdi-emoticon-neutral"></i></h1></td>
                     </tr>
                     <tr>
-                      <th scope="row">2</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@TwBootstrap</td>
+                      <td>Leandro Kersting Freitas</td>
+                      <td><h1><i class="text-success mdi mdi-emoticon-happy"></i></h1></td>
+                      <td><h1><i class="text-danger mdi mdi-emoticon-sad"></i></h1></td>
+                      <td><h1><i class="text-warning mdi mdi-emoticon-neutral"></i></h1></td>
+                      <td><h1><i class="text-success mdi mdi-emoticon-happy"></i></h1></td>
+                      <td><h1><i class="text-danger mdi mdi-emoticon-sad"></i></h1></td>
+                      <td><h1><i class="text-success mdi mdi-emoticon-happy"></i></h1></td>
+                      <td><h1><i class="text-warning mdi mdi-emoticon-neutral"></i></h1></td>
                     </tr>
                     <tr>
-                      <th scope="row">3</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
+                      <td>Juliano Mendes</td>
+                      <td><h1><i class="text-success mdi mdi-emoticon-happy"></i></h1></td>
+                      <td><h1><i class="text-danger mdi mdi-emoticon-sad"></i></h1></td>
+                      <td><h1><i class="text-warning mdi mdi-emoticon-neutral"></i></h1></td>
+                      <td><h1><i class="text-success mdi mdi-emoticon-happy"></i></h1></td>
+                      <td><h1><i class="text-danger mdi mdi-emoticon-sad"></i></h1></td>
+                      <td><h1><i class="text-warning mdi mdi-emoticon-neutral"></i></h1></td>
+                      <td><h1><i class="text-success mdi mdi-emoticon-happy"></i></h1></td>
+                    </tr>
+                    <tr>
+                      <td>Flavio Oliveira</td>
+                      <td><h1><i class="text-success mdi mdi-emoticon-happy"></i></h1></td>
+                      <td><h1><i class="text-danger mdi mdi-emoticon-sad"></i></h1></td>
+                      <td><h1><i class="text-success mdi mdi-emoticon-happy"></i></h1></td>
+                      <td><h1><i class="text-success mdi mdi-emoticon-happy"></i></h1></td>
+                      <td><h1><i class="text-danger mdi mdi-emoticon-sad"></i></h1></td>
+                      <td><h1><i class="text-warning mdi mdi-emoticon-neutral"></i></h1></td>
+                      <td><h1><i class="text-danger mdi mdi-emoticon-sad"></i></h1></td>
+                    </tr>
+                    <tr>
+                      <td>Roberto Silva</td>
+                      <td><h1><i class="text-success mdi mdi-emoticon-happy"></i></h1></td>
+                      <td><h1><i class="text-danger mdi mdi-emoticon-sad"></i></h1></td>
+                      <td><h1><i class="text-success mdi mdi-emoticon-happy"></i></h1></td>
+                      <td><h1><i class="text-success mdi mdi-emoticon-happy"></i></h1></td>
+                      <td><h1><i class="text-danger mdi mdi-emoticon-sad"></i></h1></td>
+                      <td><h1><i class="text-warning mdi mdi-emoticon-neutral"></i></h1></td>
+                      <td><h1><i class="text-danger mdi mdi-emoticon-sad"></i></h1></td>
                     </tr>
                     </tbody>
                   </table>
