@@ -1,3 +1,10 @@
+<script>
+    export default {
+        name: 'CrudPageTitle',
+        props: ['icon', 'main', 'sub']
+    }
+</script>
+
 <template>
     <div class="page-title">
         <h1><i v-if="icon" :class="icon"></i> {{ main }}</h1>
@@ -5,13 +12,6 @@
         <hr>
     </div>
 </template>
-
-<script>
-    export default {
-        name: 'CrudPageTitle',
-        props: ['icon', 'main', 'sub']
-    }
-</script>
 
 <style>
 </style>
